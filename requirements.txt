@@ -14,6 +14,7 @@ cryptography==36.0.1
 fastapi==0.70.1
 fpdf==1.7.2
 greenlet==1.1.2
+gunicorn==20.1.0
 h11==0.12.0
 idna==3.3
 jmespath==0.10.0
@@ -28,6 +29,7 @@ PyMySQL==1.0.2
 pyOpenSSL==21.0.0
 python-dateutil==2.8.2
 python-dotenv==0.19.2
+python-multipart==0.0.5
 pytz==2021.3
 requests==2.26.0
 s3transfer==0.5.0
@@ -49,4 +51,3 @@ wsproto==1.0.0
 mysql==0.0.3
 mysql-connector-python-rf==2.2.2
 mysqlclient==2.1.0
-python-multipart==0.0.5
