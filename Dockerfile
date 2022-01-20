@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY . /backend
 
-ENTRYPOINT ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "main:app"]
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "main:app"]
