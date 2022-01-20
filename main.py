@@ -18,7 +18,7 @@ from utils import save_pdf
 todas_capitais = ["Rio Branco", "Maceió", "Macapá", "Manaus", "Salvador", "Fortaleza", "Brasília", "Vitória", "Goiânia", "São Luís", "Cuiabá", "Campo Grande", "Belo Horizonte", "Belém", "João Pessoa", "Curitiba", "Recife", "Teresina", "Rio de Janeiro", "Natal", "Porto Alegre", "Porto Velho", "Boa Vista", "Florianópolis", "São Paulo", "Aracaju", "Palmas"]
 
 origins = [
-    f"http://0.0.0.0:{os.getenv('PORT')}",
+        os.getenv('REACT_URL_FRONTEND')
 ]
 
 load_dotenv(dotenv_path='login.env')
