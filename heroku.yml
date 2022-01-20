@@ -1,6 +1,6 @@
 build:
   docker:
     backend: "Dockerfile"
-    run:
-      backend: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
+run:
+  backend: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app
 
