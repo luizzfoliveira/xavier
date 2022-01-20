@@ -124,7 +124,7 @@ class Consulta extends React.Component {
   handleChangeStacks = e => {
     var values = [];
     for (i = 0; i < e.length; i++)
-      values.push(e[i].value.replace("C++", "Cpp").replace("C#", "Csharp"));
+      values.push(e[i].value.replace("c++", "cpp").replace("c#", "csharp"));
     this.stacksExecute = [...values];
     this.getPreview();
   }

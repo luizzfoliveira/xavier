@@ -4,16 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-selenium = "*"
 mysql-connector-python = "*"
 fastapi = "*"
-jinja2 = "*"
 pytest = "*"
 uvicorn = "*"
 pandas = "*"
 python-dotenv = "*"
 pymysql = "*"
-unicode = "*"
 unidecode = "*"
 sqlalchemy = "*"
 fpdf = "*"
