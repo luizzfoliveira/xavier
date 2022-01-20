@@ -1,6 +1,8 @@
 build:
   docker:
     backend: "Dockerfile"
+  config:
+    REQUIREMENTS_FILENAME: heroku.yml
 run:
   backend: gunicorn -w 3 -k uvicorn.workers.UvicornWorker main:app
 
