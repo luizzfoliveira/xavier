@@ -21,7 +21,7 @@ origins = [
         os.getenv('REACT_URL_FRONTEND')
 ]
 
-load_dotenv(dotenv_path='login.env')
+# load_dotenv(dotenv_path='login.env')
 
 app = FastAPI()
 app.add_middleware(
@@ -41,10 +41,12 @@ password = os.getenv("DB_PASSWD")
 sql = f'mysql+pymysql://{user}:{password}@{host}:3306/decasoft_xavier'
 engine = create_engine(sql, echo=False)
 
+
 @event.listens_for(engine, 'before_cursor_execute')
 def receive_before_cursor_execute(conn, cursor, statement, params, context, executemany):
     if executemany:
         cursor.fast_executemany = True
+
 
 def agg(a):
     a = a.replace(np.nan, "")
@@ -55,6 +57,7 @@ def agg(a):
     ret = ret.strip()
 
     return ret
+
 
 def initialize():
     db['mercado'].replace(np.nan, "", inplace=True)
@@ -78,9 +81,11 @@ def initialize():
     global dropdown_list
     dropdown_list = {"mercados": mercados, "stacks": stacks, "colunas": db.columns.tolist()}
 
+
 initialize()
 """ DELETE FROM `empresa_merge_teste` WHERE `nome` like '%Cleimes%' or `nome` like '%JR%INFORMATICA%' """
- 
+
+
 def update_db_2(adicionar):
     values = ""
     query = "INSERT INTO empresa_merge_teste ("
@@ -213,9 +218,11 @@ async def upload(file: UploadFile=File(...)):
     else:
         return {"message" : "Coluna 'nome' está faltando"}
 
+
 @app.get("/dropdown")
 def dropdown():
     return dropdown_list
+
 
 @app.get("/search")
 def get_info(market: str, stack: str, state: str, capitais: str, colunas: str, 
@@ -373,6 +380,5 @@ def get_preview(state: str, cidade: str, market:str, stack: str, capitais: str):
                 query += ' or '
     else:
         return '0'
-    
     df = db.query(query)
     return len(df.index)
