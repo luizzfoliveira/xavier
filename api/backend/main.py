@@ -20,6 +20,7 @@ todas_capitais = ["rio branco", "maceio", "macapa", "manaus", "salvador", "forta
 
 origins = [
     "http://localhost:3000",
+    "http://localhost:3001",
 ]
 
 load_dotenv(dotenv_path='login.env')
@@ -43,7 +44,8 @@ engine = create_engine(f'postgresql://{user}:{passwd}\
 @{host}:{port}/{database}')
 
 conn = engine.connect()
-db = pd.read_sql_query("SELECT * FROM main", conn)
+db = pd.read_sql_query("SELECT * FROM main3", conn)
+conn.close()
 
 """ @event.listens_for(engine, 'before_cursor_execute')
 def receive_before_cursor_execute(conn, cursor, statement, params, context, executemany):
