@@ -75,7 +75,7 @@ class App extends Component {
       <>
         <GlobalStyle />
       
-      <Card data-testid="card"  style={{ width: this.width, height: "100%", marginLeft: "auto", marginRight: "auto" }}>
+      <Card data-testid="card"  style={{ width: '35%', height: "100%", marginLeft: "auto", marginRight: "auto" }}>
           <Card.Body style={{height: "100%"}}>
           {this.state.theme === 'light' ? <this.Lua/> : <this.Sol/>}
           
