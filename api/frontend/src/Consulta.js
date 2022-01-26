@@ -16,7 +16,6 @@ var i;
 
 class Consulta extends React.Component {
   constructor() {
-    console.log(localStorage.getItem('theme'));
     super();
     this.estadosExecute = [];
     this.mercadosExecute = [];
@@ -32,7 +31,7 @@ class Consulta extends React.Component {
       showCidades: false,
     }
     this.fileName = "Untitled";
-    this.extension = "csv";
+    this.extension = "xlsx";
     this.dropdown = new Dropdown();
   }
 
@@ -187,17 +186,17 @@ class Consulta extends React.Component {
             <Col>
               <input type="radio" className="btn-check" id="btnradio1" value="sim" name="capitais" defaultChecked
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio1"><h7>Com Capitais</h7></label>
+              <label className="btn btn-outline-primary" htmlFor="btnradio1"><h6>Com Capitais</h6></label>
             </Col>
             <Col>
               <input type="radio" className="btn-check" id="btnradio2" value="nao" name="capitais"
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio2"><h7>Sem Capitais</h7></label>
+              <label className="btn btn-outline-primary" htmlFor="btnradio2"><h6>Sem Capitais</h6></label>
             </Col>
             <Col>
               <input type="radio" className="btn-check" id="btnradio3" value="esp" name="capitais"
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio3"><h7>Específicas</h7></label>
+              <label className="btn btn-outline-primary" htmlFor="btnradio3"><h6>Específicas</h6></label>
             </Col>
           </Row>
           { this.state.showCidades && <Row style={{paddingTop: '10px'}}>
@@ -293,13 +292,13 @@ class Consulta extends React.Component {
                 name='fileType'
                 inputId='fileType'
                 options={[
-                  {label: ".csv", value: "csv"},
-                  {label: ".xlsx", value: "xlsx"},
-                  {label: ".pdf", value: "pdf"},
+                  { label: "Excel", value: "xlsx" },
+                  { label: "CSV", value: "csv" },
+                  { label: "PDF", value: "pdf" },
                 ]}
-                defaultValue={{ label: ".csv", value: "csv" }}
+                defaultValue={{ label: "Excel", value: "xlsx" }}
                 onChange={ this.handleChangeExtension }
-                style={{width: "50%"}}
+                style={{ width: "50%" }}
                 />
               </form>
             </Col>

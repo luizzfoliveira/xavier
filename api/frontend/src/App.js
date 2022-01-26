@@ -7,7 +7,6 @@ import Figure from 'react-bootstrap/Figure'
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './themes'
 import { Appearance } from 'react-native';
-import { useWindowDimensions } from './use-window-dimension'
 
 class App extends Component {
   constructor () {
@@ -18,7 +17,6 @@ class App extends Component {
       name: 'React',
       width: window.innerWidth,
     };
-    window.addEventListener('resize', this.handleResize);
   }
 
   handleResize = () => {
@@ -66,9 +64,7 @@ class App extends Component {
   };
   
   render() {
-    const a = [1, 2, 3, 4];
-    a.splice(0, 2);
-    console.log(typeof(42))
+    window.addEventListener('resize', this.handleResize);
     return (
       <div>
       <ThemeProvider theme={{ mode: this.state.theme }}>

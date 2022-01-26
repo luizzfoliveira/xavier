@@ -4,13 +4,11 @@ import shutil
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from Log import Log
 import pandas as pd
 import numpy as np
 from os import getenv, remove
 from unidecode import unidecode
-from sqlalchemy import create_engine, event
-from mysql import connector
+from sqlalchemy import create_engine
 import time
 from io import StringIO
 from utils import save_pdf
@@ -43,14 +41,7 @@ database = getenv('DBNAME')
 engine = create_engine(f'postgresql://{user}:{passwd}\
 @{host}:{port}/{database}')
 
-conn = engine.connect()
-db = pd.read_sql_query("SELECT * FROM main3", conn)
-conn.close()
-
-""" @event.listens_for(engine, 'before_cursor_execute')
-def receive_before_cursor_execute(conn, cursor, statement, params, context, executemany):
-    if executemany:
-        cursor.fast_executemany = True """
+db = pd.read_sql_table("main", engine)
 
 def agg(a):
     a = a.replace(np.nan, "")
@@ -103,7 +94,7 @@ def update_db(adicionar):
     nome = cols.index('nome')
     cols = [cols[nome]] + cols[:nome] + cols[nome + 1:]
     adicionar = adicionar[cols]
-    adicionar.to_sql("empresa_merge_teste", engine, if_exists='replace', index=False)
+    adicionar.to_sql("main", engine, if_exists='replace', index=False)
     """ with engine.connect() as con:
         con.execute('ALTER TABLE `empresa_merge_teste` ADD PRIMARY KEY (id);') """
     t1 = time.time()
@@ -131,8 +122,7 @@ def importFile (NomeArquivo):
     aggregation_user = {'estado': 'first', 'cidade': 'first', 'mercado': agg, 'stacks': agg}
     
     t0 = time.time()
-    pd.read_sql_table
-    df = pd.read_sql_query("SELECT * FROM user", conn)
+    df = pd.read_sql_table("user", engine)
     adicionar = pd.concat([df, adicionar], axis=0, ignore_index=True)
     adicionar = adicionar.groupby(['nome'], as_index=False).aggregate(aggregation_user)
 
@@ -170,6 +160,12 @@ async def upload(file: UploadFile=File(...)):
         return {"message" : 'Cadastrados com sucesso'}
     else:
         return {"message" : "Coluna 'nome' está faltando"}
+
+@app.get("/api/download-user-table")
+def user_table():
+    df = pd.read_sql_table('user', engine)
+    df.to_csv('tabela_usuario.csv', sep=',', index=False)
+    return FileResponse('tabela_usuario.csv', filename='tabela_usuario.csv')
 
 @app.get("/dropdown")
 def dropdown():
