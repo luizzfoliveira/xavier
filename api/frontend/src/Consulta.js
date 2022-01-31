@@ -184,19 +184,20 @@ class Consulta extends React.Component {
           <label htmlFor="cidades"><h2>Cidades</h2></label>
           <Row>
             <Col>
+            {/* btn-outline-primary */}
               <input type="radio" className="btn-check" id="btnradio1" value="sim" name="capitais" defaultChecked
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio1"><h6>Com Capitais</h6></label>
+              <label className={this.props.theme === 'light' ? 'btn btn-outline-primary' : 'btn btn-outline-info'} htmlFor="btnradio1"><h6>Com Capitais</h6></label>
             </Col>
             <Col>
               <input type="radio" className="btn-check" id="btnradio2" value="nao" name="capitais"
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio2"><h6>Sem Capitais</h6></label>
+              <label className={this.props.theme === 'light' ? 'btn btn-outline-primary' : 'btn btn-outline-info'} htmlFor="btnradio2"><h6>Sem Capitais</h6></label>
             </Col>
             <Col>
               <input type="radio" className="btn-check" id="btnradio3" value="esp" name="capitais"
               onChange={ this.handleCidadesRadio }></input>
-              <label className="btn btn-outline-primary" htmlFor="btnradio3"><h6>Específicas</h6></label>
+              <label className={this.props.theme === 'light' ? 'btn btn-outline-primary' : 'btn btn-outline-info'} htmlFor="btnradio3"><h6>Específicas</h6></label>
             </Col>
           </Row>
           { this.state.showCidades && <Row style={{paddingTop: '10px'}}>
@@ -306,6 +307,7 @@ class Consulta extends React.Component {
           <Row>
             <Col style={{marginTop:"10px"}}>
               <Button
+              className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
               data-testid="download"
               variant="primary"
               style={{marginLeft: "0px"}}
@@ -317,6 +319,7 @@ class Consulta extends React.Component {
           <Row>
             <Col style ={{ paddingTop: "10px" }}>
               <Button
+              className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
               data-testid="upload"
               variant="primary"
               onClick={ this.upload }>

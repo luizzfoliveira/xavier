@@ -193,6 +193,7 @@ class Upload extends Component {
           <TooltipCard style={{ flex: '1 1 50%' }}
           theme={ this.props.theme === 'light' ? darkGeneric : lightGeneric }>
             <TooltipButton
+            className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
             style={{ width: '100%'}}
             data-testid="downloadModelo"
             variant="primary"
@@ -207,6 +208,7 @@ class Upload extends Component {
           <TooltipCard style={{ flex: '1 1 50%' }}
           theme={ this.props.theme === 'light' ? darkGeneric : lightGeneric }>
             <TooltipButton
+            className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
             style={{ width: '100%'}}
             data-tip='React-tootltip'
             data-testid="downloadUsuario"
@@ -238,6 +240,7 @@ class Upload extends Component {
 				</Col>
 				<Col xs lg="2">
 					<Button
+          className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
 					data-testid="download"
 					variant="primary"
 					onClick={ this.onFileUpload }>
@@ -256,6 +259,7 @@ class Upload extends Component {
 			<Row style={{paddingTop: '10px'}}>
 				<Col>
 				<Button
+        className={this.props.theme === 'light' ? 'btn-primary' : 'btn-info'}
 				data-testid="download"
 				variant="primary"
 				onClick={this.voltar}>

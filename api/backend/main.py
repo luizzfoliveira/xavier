@@ -147,6 +147,18 @@ def importFile (NomeArquivo):
     initialize()
     return True, erradas
 
+# @app.get('/api/get_env')
+# def get_env():
+# 	return {
+# 		'apiKey': getenv('APIKEY'),
+# 		'authDomain': getenv('AUTHDOMAIN'),
+# 		'projectId': getenv('PROJECTID'),
+# 		'storageBucket': getenv('STORAGEBUCKET'),
+# 		'messagingSenderId': getenv('MESSAGINGSENDERID'),
+# 		'appId': getenv('APPID'),
+# 		'measurementId': getenv('MEASUREMENTID')
+# 	}
+
 @app.post("/api/uploadfile")
 async def upload(file: UploadFile=File(...)):
     with open(f"{file.filename}","wb") as buffer:
