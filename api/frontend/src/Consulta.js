@@ -10,7 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCidades } from './Utils';
 import { darkSelect, lightSelect, darkGeneric, lightGeneric } from './themes';
 import { Navigate } from "react-router-dom";
-
+import { analytics } from '.';
+import { logEvent } from 'firebase/analytics';
 
 var i;
 
@@ -25,7 +26,6 @@ class Consulta extends React.Component {
     this.capitais = 'sim';
     this.state = {
       redirect: '',
-      cardTheme: "card bg-light mb-3",
       preview: "0",
       cidades: [],
       showCidades: false,
@@ -36,6 +36,18 @@ class Consulta extends React.Component {
   }
 
   download = async () => {
+    /* log event to firebase */
+    logEvent(analytics, 'download', {
+      estados: this.estadosExecute,
+      capitais: this.capitais,
+      cidades: this.cidadesExecute,
+      mercados: this.mercadosExecute,
+      stacks: this.stacksExecute,
+      preview: this.state.preview,
+      extension: this.extension,
+      colunas: this.colunasExecute,
+    });
+
     const req_options = {
       method: "GET",
     }
@@ -87,6 +99,12 @@ class Consulta extends React.Component {
   };
 
   handleChangeEstados = e => {
+    // logEvent(analytics, 'goal_completion', { name: 'lever_puzzle'})
+    /* log event to firebase */
+    logEvent(analytics, 'select_content', {
+      content_type: 'dropdown_selection',
+      content_id: 'select_estados',
+    });
     var values = [];
     for (i = 0; i < e.length; i++)
       values.push(e[i].value);
@@ -105,6 +123,11 @@ class Consulta extends React.Component {
   }
 
   handleChangeMercados = e => {
+    /* log event to firebase */
+    logEvent(analytics, 'select_content', {
+      content_type: 'dropdown_selection',
+      content_id: 'select_mercados',
+    });
     var values = [];
     for (i = 0; i < e.length; i++)
       values.push(e[i].value);
@@ -121,6 +144,11 @@ class Consulta extends React.Component {
   }
 
   handleChangeStacks = e => {
+    /* log event to firebase */
+    logEvent(analytics, 'select_content', {
+      content_type: 'dropdown_selection',
+      content_id: 'select_stacks',
+    });
     var values = [];
     for (i = 0; i < e.length; i++)
       values.push(e[i].value.replace("c++", "cpp").replace("c#", "csharp"));
@@ -171,6 +199,7 @@ class Consulta extends React.Component {
               <Select
               styles={ this.props.theme === 'light' ? lightSelect: darkSelect }
               classNamePrefix='estados'
+              id="estados"
               name="estados"
               inputId="estados"
               options={this.dropdown.estados}
