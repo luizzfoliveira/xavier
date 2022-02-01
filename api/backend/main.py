@@ -168,7 +168,7 @@ async def upload(file: UploadFile=File(...)):
         erradas = ", ".join([str(i) for i in (erradas.index + 1)])
         if erradas:
             print(erradas)
-            return {"message" : "As linhas " + erradas + " são inválidas, as outras foram adicionadas com sucesso!!"}
+            return {"message" : "As linhas " + erradas + " são inválidas, as demais foram adicionadas com sucesso!!"}
         return {"message" : 'Cadastrados com sucesso'}
     else:
         return {"message" : "Coluna 'nome' está faltando"}
