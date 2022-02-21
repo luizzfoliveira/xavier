@@ -8,7 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: get secrets
+      
+    - name: setup
+      run: |
+        mkdir ~/.secret
+        touch ~/.secret/psql.env ~/.secret/firebase.env
+
+    - name: tests
       env:
         DBHOST: ${{ secrets.DBHOST }}
         DBUSER: ${{ secrets.DBUSER }}
@@ -22,11 +28,6 @@ jobs:
         MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
         APPID: ${{ secrets.APPID }}
         MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
-    - name: setup
-      run: |
-        mkdir ~/.secret
-        touch ~/.secret/psql.env ~/.secret/firebase.env
-    - name: tests
       run: |
         cd api
         bash run_compose.sh test
