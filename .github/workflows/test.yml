@@ -7,6 +7,7 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: get secrets
       env:
         DBHOST: ${{ secrets.DBHOST }}
@@ -21,7 +22,6 @@ jobs:
         MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
         APPID: ${{ secrets.APPID }}
         MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
-    - uses: actions/checkout@v2
     - name: setup
       run: |
         mkdir ~/.secret
