@@ -13,7 +13,10 @@ jobs:
         mkdir ~/.secret
         touch ~/.secret/psql.env ~/.secret/firebase.env
     - name: tests
-      run: bash ./api/run_compose.sh test
+      run: |
+        cd api
+        bash run_compose.sh test
+        cd ..
       env:
         DBHOST: ${{ secrets.DBHOST }}
         DBUSER: ${{ secrets.DBUSER }}
