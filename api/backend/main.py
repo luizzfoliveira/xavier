@@ -49,6 +49,11 @@ user = getenv('DBUSER')
 passwd = getenv('DBPASS')
 port = getenv('DBPORT')
 database = getenv('DBNAME')
+print(host)
+print(user)
+print(passwd)
+print(port)
+print(database)
 
 engine = create_engine(f'postgresql://{user}:{passwd}\
 @{host}:{port}/{database}')
