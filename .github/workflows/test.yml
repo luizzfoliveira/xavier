@@ -16,19 +16,20 @@ jobs:
 
     - name: tests
       env:
-        DBHOST: ${{ secrets.DBHOST }}
-        DBUSER: ${{ secrets.DBUSER }}
-        DBPASS: ${{ secrets.DBPASS }}
-        DBPORT: ${{ secrets.DBPORT }}
-        DBNAME: ${{ secrets.DBNAME }}
-        APIKEY: ${{ secrets.APIKEY }}
-        AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
-        PROJECTID: ${{ secrets.PROJECTID }}
-        STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
-        MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
-        APPID: ${{ secrets.APPID }}
-        MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
-      run: echo ${#DBHOST}
+        TEST: '123'
+        # DBHOST: ${{ secrets.DBHOST }}
+        # DBUSER: ${{ secrets.DBUSER }}
+        # DBPASS: ${{ secrets.DBPASS }}
+        # DBPORT: ${{ secrets.DBPORT }}
+        # DBNAME: ${{ secrets.DBNAME }}
+        # APIKEY: ${{ secrets.APIKEY }}
+        # AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
+        # PROJECTID: ${{ secrets.PROJECTID }}
+        # STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
+        # MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
+        # APPID: ${{ secrets.APPID }}
+        # MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
+      run: echo $TEST
       # run: |
       #   cd api
       #   bash run_compose.sh test
