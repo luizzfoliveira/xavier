@@ -13,10 +13,20 @@ jobs:
       run: |
         mkdir ~/.secret
         touch ~/.secret/psql.env ~/.secret/firebase.env
+        echo "DBHOST: ${{ secrets.DBHOST }}
+        DBUSER: ${{ secrets.DBUSER }}
+        DBPASS: ${{ secrets.DBPASS }}
+        DBPORT: ${{ secrets.DBPORT }}
+        DBNAME: ${{ secrets.DBNAME }}
+        APIKEY: ${{ secrets.APIKEY }}
+        AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
+        PROJECTID: ${{ secrets.PROJECTID }}
+        STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
+        MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
+        APPID: ${{ secrets.APPID }}
+        MEASUREMENTID: ${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
 
     - name: tests
-      env:
-        TEST: '123'
         # DBHOST: ${{ secrets.DBHOST }}
         # DBUSER: ${{ secrets.DBUSER }}
         # DBPASS: ${{ secrets.DBPASS }}
@@ -29,8 +39,8 @@ jobs:
         # MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
         # APPID: ${{ secrets.APPID }}
         # MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
-      run: python3 teste.py
-      # run: |
-      #   cd api
-      #   bash run_compose.sh test
-      #   cd ..
+      # run: python3 teste.py
+      run: |
+        cd api
+        bash run_compose.sh test
+        cd ..
