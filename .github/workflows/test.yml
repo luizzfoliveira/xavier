@@ -13,18 +13,18 @@ jobs:
       run: |
         mkdir ~/.secret
         touch ~/.secret/firebase.env
-        echo "DBHOST: ${{ secrets.DBHOST }}
-        DBUSER: ${{ secrets.DBUSER }}
-        DBPASS: ${{ secrets.DBPASS }}
-        DBPORT: ${{ secrets.DBPORT }}
-        DBNAME: ${{ secrets.DBNAME }}
-        APIKEY: ${{ secrets.APIKEY }}
-        AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
-        PROJECTID: ${{ secrets.PROJECTID }}
-        STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
-        MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
-        APPID: ${{ secrets.APPID }}
-        MEASUREMENTID: ${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
+        echo "DBHOST=${{ secrets.DBHOST }}
+        DBUSER=${{ secrets.DBUSER }}
+        DBPASS=${{ secrets.DBPASS }}
+        DBPORT=${{ secrets.DBPORT }}
+        DBNAME=${{ secrets.DBNAME }}
+        APIKEY=${{ secrets.APIKEY }}
+        AUTHDOMAIN=${{ secrets.AUTHDOMAIN }}
+        PROJECTID=${{ secrets.PROJECTID }}
+        STORAGEBUCKET=${{ secrets.STORAGEBUCKET }}
+        MESSAGINGSENDERID=${{ secrets.MESSAGINGSENDERID }}
+        APPID=${{ secrets.APPID }}
+        MEASUREMENTID=${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
         cat ~/.secret/psql.env
 
     - name: tests
