@@ -7,6 +7,12 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     steps:
+    env:
+      DBHOST: ${{ secrets.DBHOST }}
+      DBUSER: ${{ secrets.DBUSER }}
+      DBPASS: ${{ secrets.DBPASS }}
+      DBPORT: ${{ secrets.DBPORT }}
+      DBNAME: ${{ secrets.DBNAME }}
     - uses: actions/checkout@v2
     - name: setup
       run: |
@@ -17,9 +23,3 @@ jobs:
         cd api
         bash run_compose.sh test
         cd ..
-      env:
-        DBHOST: ${{ secrets.DBHOST }}
-        DBUSER: ${{ secrets.DBUSER }}
-        DBPASS: ${{ secrets.DBPASS }}
-        DBPORT: ${{ secrets.DBPORT }}
-        DBNAME: ${{ secrets.DBNAME }}
