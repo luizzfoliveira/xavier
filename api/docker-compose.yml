@@ -8,6 +8,7 @@ services:
       - ~/.secret/psql.env
     ports:
       - "8000:8000"
+
   frontend:
     build: ./frontend/
     environment:

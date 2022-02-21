@@ -26,7 +26,6 @@ jobs:
         MESSAGINGSENDERID=${{ secrets.MESSAGINGSENDERID }}
         APPID=${{ secrets.APPID }}
         MEASUREMENTID=${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
-        cat ~/.secret/psql.env
 
     - name: tests
       run: |
