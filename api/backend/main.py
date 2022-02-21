@@ -55,8 +55,6 @@ engine = create_engine(f'postgresql://{user}:{passwd}\
 
 db = pd.read_sql_table("main", engine)
 
-print("teste")
-
 def agg(a):
     a = a.replace(np.nan, "")
     # a.dropna(inplace=True)
