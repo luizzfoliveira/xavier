@@ -2,7 +2,7 @@ name: xavier
 
 on:
   push:
-    branches: [stage]
+    branches: [main]
 jobs:
   run-tests:
     runs-on: ubuntu-latest
