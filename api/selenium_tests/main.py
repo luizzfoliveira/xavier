@@ -10,7 +10,6 @@ download_dir = f"{home}/Downloads"
 host = os.getenv('FRONT_HOST')
 BASE_URL = f'http://{host}:3000'
 
-
 def enable_download(driver):
     driver.command_executor._commands["send_command"] = (
             "POST", '/session/$sessionId/chromium/send_command')
