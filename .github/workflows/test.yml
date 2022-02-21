@@ -28,7 +28,8 @@ jobs:
         MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
         APPID: ${{ secrets.APPID }}
         MEASUREMENTID: ${{ secrets.MEASUREMENTID }}
-      run: |
-        cd api
-        bash run_compose.sh test
-        cd ..
+      run: echo $DBHOST
+      # run: |
+      #   cd api
+      #   bash run_compose.sh test
+      #   cd ..
