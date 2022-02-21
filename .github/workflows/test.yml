@@ -12,7 +12,7 @@ jobs:
     - name: setup
       run: |
         mkdir ~/.secret
-        touch ~/.secret/psql.env ~/.secret/firebase.env
+        touch ~/.secret/firebase.env
         echo "DBHOST: ${{ secrets.DBHOST }}
         DBUSER: ${{ secrets.DBUSER }}
         DBPASS: ${{ secrets.DBPASS }}
@@ -25,6 +25,7 @@ jobs:
         MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
         APPID: ${{ secrets.APPID }}
         MEASUREMENTID: ${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
+        cat ~/.secret/psql.env
 
     - name: tests
         # DBHOST: ${{ secrets.DBHOST }}
