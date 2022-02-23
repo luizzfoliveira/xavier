@@ -81,7 +81,7 @@ class Upload extends Component {
   };
 
   downloadModelo = async () => {
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     logEvent(analyticsHere, "download_modelo", {});
     const link = document.createElement("a");
     link.href = modelo;
@@ -98,13 +98,11 @@ class Upload extends Component {
   };
 
   downloadTabelaUsuario = async () => {
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     this.setState({ isDownloading: true, val: 0 });
-    const req_options = {
-      method: "GET",
-    };
 
-    fetch(BASE_URL + "/api/download-user-table", req_options)
+    axios
+      .get(BASE_URL + "/api/download-user-table")
       .then((response) => response.blob())
       .then((blob) => {
         // Create blob link to download

@@ -1,6 +1,7 @@
 import React from "react";
+import axios from "axios";
 
-console.log(process.env.REACT_APP_BASE_URL)
+console.log(process.env.REACT_APP_BASE_URL);
 export var BASE_URL = `http://${process.env.REACT_APP_BASE_URL}:8000`;
 
 var estados_ori = [
@@ -53,10 +54,7 @@ export default class Dropdown extends React.Component {
       });
     }
 
-    const req_options = {
-      method: "GET",
-    };
-    const response = await fetch(BASE_URL + "/dropdown", req_options);
+    const response = await axios.get(BASE_URL + "/dropdown");
     const data = response.json();
     var that = this;
     data.then(function (resp) {

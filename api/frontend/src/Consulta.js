@@ -13,6 +13,7 @@ import Upload from "./Upload";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./themes";
 import "./consulta.css";
+import axios from "axios";
 
 var i;
 
@@ -58,9 +59,6 @@ class Consulta extends React.Component {
       colunas: this.colunasExecute,
     });
 
-    const req_options = {
-      method: "GET",
-    };
     if (
       this.mercadosExecute.length === 0 &&
       this.estadosExecute.length === 0 &&
@@ -69,24 +67,24 @@ class Consulta extends React.Component {
       alert("Preencha algum campo");
       return;
     }
-    await fetch(
-      BASE_URL +
-        "/search?market=" +
-        this.mercadosExecute +
-        "&stack=" +
-        this.stacksExecute +
-        "&state=" +
-        this.estadosExecute +
-        "&extension=" +
-        this.extension +
-        "&cidade=" +
-        this.cidadesExecute +
-        "&capitais=" +
-        this.capitais +
-        "&colunas=" +
-        this.colunasExecute,
-      req_options
-    )
+    await axios
+      .get(
+        BASE_URL +
+          "/search?market=" +
+          this.mercadosExecute +
+          "&stack=" +
+          this.stacksExecute +
+          "&state=" +
+          this.estadosExecute +
+          "&extension=" +
+          this.extension +
+          "&cidade=" +
+          this.cidadesExecute +
+          "&capitais=" +
+          this.capitais +
+          "&colunas=" +
+          this.colunasExecute
+      )
       .then((response) => response.blob())
       .then((blob) => {
         // Create blob link to download
@@ -107,10 +105,10 @@ class Consulta extends React.Component {
   };
 
   getPreview = async () => {
-    const req_options = {
-      method: "GET",
-    };
-    const response = await fetch(
+    // const req_options = {
+    //   method: "GET",
+    // };
+    const response = await axios.get(
       BASE_URL +
         "/preview?market=" +
         this.mercadosExecute +
@@ -121,8 +119,7 @@ class Consulta extends React.Component {
         "&cidade=" +
         this.cidadesExecute +
         "&capitais=" +
-        this.capitais,
-      req_options
+        this.capitais
     );
 
     const data = await response.json();

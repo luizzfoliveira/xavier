@@ -1,13 +1,25 @@
 import App from "./App";
-import Dropdown from "./Dropdown";
+import Dropdown, { BASE_URL } from "./Dropdown";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import React from "react";
 import selectEvent from "react-select-event";
 import { getCidades } from "./Utils";
 import { act } from "react-dom/test-utils";
+import axios from "axios";
+import { getFirebaseCredentials } from "./firebase";
+import { logEvent } from "firebase/analytics";
 
+jest.mock("axios");
+jest.mock("firebase/analytics");
+jest.mock("./firebase");
 jest.mock("./Dropdown");
 jest.mock("./Utils");
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ rates: { CAD: 1.42 } }),
+  })
+);
 
 afterEach(cleanup);
 
@@ -47,12 +59,14 @@ test("check nothing in mercados dropdown", async () => {
 });
 
 test("select Finanças from mercados dropdown", async () => {
-  render(<App />);
+  await act(async () => {
+    render(<App />);
 
-  await selectEvent.select(screen.getByLabelText("Mercados"), ["Finanças"]);
+    await selectEvent.select(screen.getByLabelText("Mercados"), ["Outros"]);
 
-  expect(screen.getByTestId("form-mercados")).toHaveFormValues({
-    mercados: "Finanças",
+    expect(screen.getByTestId("form-mercados")).toHaveFormValues({
+      mercados: "Outros",
+    });
   });
 });
 
@@ -69,12 +83,14 @@ test("check nothing in stacks dropdown", async () => {
 });
 
 test("select C++ and C# from stacks dropdown", async () => {
-  render(<App />);
+  await act(async () => {
+    render(<App />);
 
-  await selectEvent.select(screen.getByLabelText("Stacks"), ["C++", "C#"]);
+    await selectEvent.select(screen.getByLabelText("Stacks"), ["C++", "C#"]);
 
-  expect(screen.getByTestId("form-stacks")).toHaveFormValues({
-    stacks: ["C++", "C#"],
+    expect(screen.getByTestId("form-stacks")).toHaveFormValues({
+      stacks: ["C++", "C#"],
+    });
   });
 });
 
