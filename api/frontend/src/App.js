@@ -3,13 +3,12 @@ import Figure from "react-bootstrap/Figure";
 import Consulta from "./Consulta";
 import { Appearance } from "react-native";
 // Import the functions you need from the SDKs you need
-import {getFirebaseCredentials} from './firebase';
+import { getFirebaseCredentials } from "./firebase";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 
 export var analytics = getFirebaseCredentials();
 
