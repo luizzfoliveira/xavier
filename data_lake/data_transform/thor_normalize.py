@@ -1,8 +1,5 @@
-from operator import index
 import pandas as pd
-from sqlalchemy import create_engine
 from collections import Counter
-import os
 
 
 def narray_colunm_to_list(column: pd) -> None:
@@ -31,30 +28,26 @@ def merge_duplicates(array: pd):
     return new_list
 
 
+def thor_normalize():
+    df = pd.read_parquet('./raw_data/thor.parquet')
 
-df = pd.read_parquet('./raw_data/thor.parquet')
+    narray_colunm_to_list(df['stacks'])
+    lower_and_strip_datas(df)
+    df = remove_duplicates(df)
 
-narray_colunm_to_list(df['stacks'])
-lower_and_strip_datas(df)
-df = remove_duplicates(df)
+    for i, stack in enumerate(df['stacks']):
+        df['stacks'][i] = stack.split(',')
 
-for i, stack in enumerate(df['stacks']):
-    df['stacks'][i] = stack.split(',')
+    to_merge = df['name'].tolist()
+    to_merge = (item for item, count in Counter(to_merge).items() if count > 1)
 
-to_merge = df['name'].tolist()
-to_merge = [item for item, count in Counter(to_merge).items() if count > 1]
+    for name in to_merge:
+        array = df.loc[df['name'] == name]
+        array = merge_duplicates(array)
+        df = df.loc[df['name'] != name]
+        df2 = pd.DataFrame(
+            [[name, array]], columns=['name', 'stacks'])
+        df = pd.concat((df, df2), axis=0)
 
-for i, name in enumerate(to_merge):
-    array = df.loc[df['name'] == name]
-    array = merge_duplicates(array)
-    df = df.loc[df['name'] != name]
-    df2 = pd.DataFrame(
-        [[name, array]], columns=['name', 'stacks'])
-    df = pd.concat((df, df2), axis=0)
-
-path = './clean_data'
-if os.path.exists(path) is False:
-    os.makedirs(path)
-
-df = df.reset_index(drop=True)
-df.to_parquet("./clean_data/programathor.parquet", index=False)
+    df = df.reset_index(drop=True)
+    df.to_parquet("./clean_data/programathor.parquet", index=False)

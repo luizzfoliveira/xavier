@@ -1,47 +1,17 @@
-import boto3
-import os
-import configparser
+from s3 import S3
+from const import OBJ_NAME, BUCKET_NAME
 
 
-def download_file_from_s3(name: str) -> None:
-    s3.download_file(
-        'ilia-ecole42-xavier',
-        f'raw_data/{name}.parquet',
-        f'raw_data/{name}.parquet')
-    return None
+def download_file_from_s3(name: str):
+    with S3() as s3_obj:
+        s3_obj.download_from_s3(
+                bucket_name=BUCKET_NAME,
+                obj_name=OBJ_NAME + name,
+                name='raw_data/' + name
+                )
 
 
-config = configparser.ConfigParser()
-path = os.path.join(os.path.expanduser('~'), '.aws/credentials')
-config.read(path)
-
-# pegando as chaves e a regiào para o projeto xavier
-aws_access_key_id = config.get('ilia-ecole42-xavier', 'aws_access_key_id')
-aws_secret_access_key = config.get(
-    'ilia-ecole42-xavier', 'aws_secret_access_key')
-aws_region = config.get('ilia-ecole42-xavier', 'aws_region')
-
-# inicializando o cliente boto3
-boto3.setup_default_session(
-    region_name=aws_region,
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key
-    )
-
-# definindo o recurso da aws que será usado
-s3 = boto3.client('s3')
-
-# pegando todos os objetos do bucket da pasta users
-response = s3.list_objects(
-    Bucket='ilia-ecole42-xavier',
-    Prefix='users',
-    )
-
-path = './raw_data'
-if os.path.exists(path) is False:
-    os.makedirs(path)
-
-download_file_from_s3('thor')
-download_file_from_s3('codesh')
-download_file_from_s3('startupbase')
-download_file_from_s3('slintel')
+download_file_from_s3('thor.parquet')
+download_file_from_s3('codesh.parquet')
+download_file_from_s3('startupbase.parquet')
+download_file_from_s3('slintel.parquet')
