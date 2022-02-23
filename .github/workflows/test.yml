@@ -30,6 +30,7 @@ jobs:
     - name: react tests
       run: |
         cd api/frontend
+        npm install
         npm test
 
     - name: selenium tests
