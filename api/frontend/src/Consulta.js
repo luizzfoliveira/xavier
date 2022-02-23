@@ -45,7 +45,7 @@ class Consulta extends React.Component {
   }
 
   download = async () => {
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     /* log event to firebase */
     logEvent(analyticsHere, "download", {
       estados: this.estadosExecute,
@@ -57,7 +57,6 @@ class Consulta extends React.Component {
       extension: this.extension,
       colunas: this.colunasExecute,
     });
-
 
     const req_options = {
       method: "GET",
@@ -133,7 +132,7 @@ class Consulta extends React.Component {
   handleChangeEstados = async (e) => {
     // logEvent(analytics, 'goal_completion', { name: 'lever_puzzle'})
     /* log event to firebase */
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     logEvent(analyticsHere, "select_content", {
       content_type: "dropdown_selection",
       content_id: "select_estados",
@@ -154,7 +153,7 @@ class Consulta extends React.Component {
 
   handleChangeMercados = async (e) => {
     /* log event to firebase */
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     logEvent(analyticsHere, "select_content", {
       content_type: "dropdown_selection",
       content_id: "select_mercados",
@@ -173,7 +172,7 @@ class Consulta extends React.Component {
 
   handleChangeStacks = async (e) => {
     /* log event to firebase */
-	let analyticsHere = await analytics;
+    let analyticsHere = await analytics;
     logEvent(analyticsHere, "select_content", {
       content_type: "dropdown_selection",
       content_id: "select_stacks",
@@ -348,9 +347,6 @@ class Consulta extends React.Component {
                 style={Object.assign({}, lightGeneric, { flex: 1 })}
               />
               <form data-testid="file-Type">
-                {/* <label hidden data-testid="label-type" htmlFor="fileType">
-                  type
-                </label> */}
                 <Select
                   styles={
                     this.props.theme === "light" ? lightSelect : darkSelect

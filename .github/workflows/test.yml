@@ -27,7 +27,12 @@ jobs:
         APPID=${{ secrets.APPID }}
         MEASUREMENTID=${{ secrets.MEASUREMENTID }}" > ~/.secret/psql.env
 
-    - name: tests
+    - name: react tests
+      run: |
+        cd api/frontend
+        npm test
+
+    - name: selenium tests
       run: |
         cd api
         bash run_compose.sh test

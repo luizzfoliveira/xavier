@@ -78,22 +78,10 @@ test("select C++ and C# from stacks dropdown", async () => {
   });
 });
 
-// test('select São Paulo and Campinas from cidades dropdown', async () => {
-//   await act(async () => {
-//     render(<App/>);
-//     const radio = screen.getAllByRole('radio');
-//     await fireEvent.click(radio[2]);
-
-//     await selectEvent.select(screen.getByLabelText('Cidades'), ['São Paulo', 'Campinas']);
-
-//     expect(screen.getByTestId('form-cidades')).toHaveFormValues({cidades: ['São Paulo', 'Campinas']})
-//   });
-// });
-
 test("select file type from ... dropdown", async () => {
   await act(async () => {
     render(<App />);
-    await selectEvent.select(screen.getByLabelText("type"), [".xlsx"]);
+    await selectEvent.select(screen.getByTestId("file-Type"), [".xlsx"]);
     expect(screen.getByTestId("file-Type")).toHaveFormValues({
       fileType: "xlsx",
     });
@@ -112,11 +100,3 @@ test("render upload button", () => {
   render(<App />);
   expect(screen.getByTestId("upload")).toBeTruthy();
 });
-
-// test('click and go to another world', async () => {
-//   await act(async () => {
-//     render(<App/>);
-//     await fireEvent.click(screen.getByTestId("upload"));
-//     expect(screen.getByTestId('fazer-upload')).toBeTruthy();
-//   });
-// });
