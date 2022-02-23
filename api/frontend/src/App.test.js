@@ -81,7 +81,7 @@ test("select C++ and C# from stacks dropdown", async () => {
 test("select file type from ... dropdown", async () => {
   await act(async () => {
     render(<App />);
-    await selectEvent.select(screen.getByTestId("file-Type"), [".xlsx"]);
+    await selectEvent.select(screen.getByTestId("file-Type"), ["Excel"]);
     expect(screen.getByTestId("file-Type")).toHaveFormValues({
       fileType: "xlsx",
     });
