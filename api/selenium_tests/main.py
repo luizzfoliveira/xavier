@@ -183,6 +183,7 @@ def test_get_csv_with_sp_state_and_expected_only_sp_state():
                 value='fileType__option'
                 )
             )
+			
     next(csv).click()
     drive.find_element(
             By.CSS_SELECTOR,
