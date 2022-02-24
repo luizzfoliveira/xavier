@@ -49,16 +49,12 @@ user = getenv('DBUSER')
 passwd = getenv('DBPASS')
 port = getenv('DBPORT')
 database = getenv('DBNAME')
-print(host)
-print(user)
-print(passwd)
-print(port)
-print(database)
 
 engine = create_engine(f'postgresql://{user}:{passwd}\
 @{host}:{port}/{database}')
 
 db = pd.read_sql_table("main", engine)
+
 
 def agg(a):
     a = a.replace(np.nan, "")
@@ -260,6 +256,7 @@ def build_query(state: str, cidade: str, market: str, stack: str, capitais: str)
 
 @app.get('/api/get_env')
 def get_env():
+    print("api key", getenv('APIKEY'))
     return {
             'apiKey': getenv('APIKEY'),
             'authDomain': getenv('AUTHDOMAIN'),

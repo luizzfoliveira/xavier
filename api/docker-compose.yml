@@ -8,7 +8,6 @@ services:
       - ~/.secret/psql.env
     ports:
       - "8000:8000"
-
   frontend:
     build: ./frontend/
     environment:
@@ -23,7 +22,7 @@ services:
       - node_modules:/frontend/node_modules
 
   tests:
-    profiles: ["tests"]
+    profiles: ["test"]
     build: ./selenium_tests/
     environment:
       - FRONT_HOST=frontend

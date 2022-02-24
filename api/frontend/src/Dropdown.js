@@ -1,7 +1,6 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
 
-console.log(process.env.REACT_APP_BASE_URL);
 export var BASE_URL = `http://${process.env.REACT_APP_BASE_URL}:8000`;
 
 var estados_ori = [
@@ -55,29 +54,26 @@ export default class Dropdown extends React.Component {
     }
 
     const response = await axios.get(BASE_URL + "/dropdown");
-    const data = response.json();
-    var that = this;
-    data.then(function (resp) {
-      for (i = 0; i < resp.mercados.length; i++) {
-        that.mercados.push({
-          label: resp.mercados[i],
-          value: resp.mercados[i],
-        });
-      }
+    const data = response.data;
+    for (i = 0; i < data.mercados.length; i++) {
+      this.mercados.push({
+        label: data.mercados[i],
+        value: data.mercados[i],
+      });
+    }
 
-      for (i = 0; i < resp.stacks.length; i++) {
-        that.stacks.push({
-          label: resp.stacks[i],
-          value: resp.stacks[i],
-        });
-      }
+    for (i = 0; i < data.stacks.length; i++) {
+      this.stacks.push({
+        label: data.stacks[i],
+        value: data.stacks[i],
+      });
+    }
 
-      for (i = 0; i < resp.colunas.length; i++) {
-        that.colunas.push({
-          label: resp.colunas[i],
-          value: resp.colunas[i],
-        });
-      }
-    });
+    for (i = 0; i < data.colunas.length; i++) {
+      this.colunas.push({
+        label: data.colunas[i],
+        value: data.colunas[i],
+      });
+    }
   };
 }

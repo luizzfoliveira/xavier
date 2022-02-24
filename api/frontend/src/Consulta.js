@@ -48,16 +48,18 @@ class Consulta extends React.Component {
   download = async () => {
     let analyticsHere = await analytics;
     /* log event to firebase */
-    logEvent(analyticsHere, "download", {
-      estados: this.estadosExecute,
-      capitais: this.capitais,
-      cidades: this.cidadesExecute,
-      mercados: this.mercadosExecute,
-      stacks: this.stacksExecute,
-      preview: this.state.preview,
-      extension: this.extension,
-      colunas: this.colunasExecute,
-    });
+    if (analyticsHere !== "Error") {
+      logEvent(analyticsHere, "download", {
+        estados: this.estadosExecute,
+        capitais: this.capitais,
+        cidades: this.cidadesExecute,
+        mercados: this.mercadosExecute,
+        stacks: this.stacksExecute,
+        preview: this.state.preview,
+        extension: this.extension,
+        colunas: this.colunasExecute,
+      });
+    }
 
     if (
       this.mercadosExecute.length === 0 &&
@@ -67,24 +69,24 @@ class Consulta extends React.Component {
       alert("Preencha algum campo");
       return;
     }
-    await axios
-      .get(
-        BASE_URL +
-          "/search?market=" +
-          this.mercadosExecute +
-          "&stack=" +
-          this.stacksExecute +
-          "&state=" +
-          this.estadosExecute +
-          "&extension=" +
-          this.extension +
-          "&cidade=" +
-          this.cidadesExecute +
-          "&capitais=" +
-          this.capitais +
-          "&colunas=" +
-          this.colunasExecute
-      )
+    await fetch(
+      BASE_URL +
+        "/search?market=" +
+        this.mercadosExecute +
+        "&stack=" +
+        this.stacksExecute +
+        "&state=" +
+        this.estadosExecute +
+        "&extension=" +
+        this.extension +
+        "&cidade=" +
+        this.cidadesExecute +
+        "&capitais=" +
+        this.capitais +
+        "&colunas=" +
+        this.colunasExecute,
+      { method: "GET" }
+    )
       .then((response) => response.blob())
       .then((blob) => {
         // Create blob link to download
@@ -105,9 +107,6 @@ class Consulta extends React.Component {
   };
 
   getPreview = async () => {
-    // const req_options = {
-    //   method: "GET",
-    // };
     const response = await axios.get(
       BASE_URL +
         "/preview?market=" +
@@ -122,7 +121,7 @@ class Consulta extends React.Component {
         this.capitais
     );
 
-    const data = await response.json();
+    const data = await response.data;
     this.setState({ preview: data });
   };
 
@@ -130,10 +129,12 @@ class Consulta extends React.Component {
     // logEvent(analytics, 'goal_completion', { name: 'lever_puzzle'})
     /* log event to firebase */
     let analyticsHere = await analytics;
-    logEvent(analyticsHere, "select_content", {
-      content_type: "dropdown_selection",
-      content_id: "select_estados",
-    });
+    if (analyticsHere !== "Error") {
+      logEvent(analyticsHere, "select_content", {
+        content_type: "dropdown_selection",
+        content_id: "select_estados",
+      });
+    }
     var values = [];
     for (i = 0; i < e.length; i++) values.push(e[i].value);
     this.estadosExecute = [...values];
@@ -151,10 +152,12 @@ class Consulta extends React.Component {
   handleChangeMercados = async (e) => {
     /* log event to firebase */
     let analyticsHere = await analytics;
-    logEvent(analyticsHere, "select_content", {
-      content_type: "dropdown_selection",
-      content_id: "select_mercados",
-    });
+    if (analyticsHere !== "Error") {
+      logEvent(analyticsHere, "select_content", {
+        content_type: "dropdown_selection",
+        content_id: "select_mercados",
+      });
+    }
     var values = [];
     for (i = 0; i < e.length; i++) values.push(e[i].value);
     this.mercadosExecute = [...values];
@@ -170,10 +173,12 @@ class Consulta extends React.Component {
   handleChangeStacks = async (e) => {
     /* log event to firebase */
     let analyticsHere = await analytics;
-    logEvent(analyticsHere, "select_content", {
-      content_type: "dropdown_selection",
-      content_id: "select_stacks",
-    });
+    if (analyticsHere !== "Error") {
+      logEvent(analyticsHere, "select_content", {
+        content_type: "dropdown_selection",
+        content_id: "select_stacks",
+      });
+    }
     var values = [];
     for (i = 0; i < e.length; i++)
       values.push(e[i].value.replace("c++", "cpp").replace("c#", "csharp"));
@@ -192,7 +197,6 @@ class Consulta extends React.Component {
 
   clearCidades = () => {
     this.cidadesExecute = this.cidadesExecute.reduce(() => []);
-    console.log(this.cidadesExecute);
     this.selectRef.clearValue();
   };
 
@@ -344,6 +348,9 @@ class Consulta extends React.Component {
                 style={Object.assign({}, lightGeneric, { flex: 1 })}
               />
               <form data-testid="file-Type">
+                {/* <label hidden data-testid="label-type" htmlFor="fileType">
+                  type
+                </label> */}
                 <Select
                   styles={
                     this.props.theme === "light" ? lightSelect : darkSelect
