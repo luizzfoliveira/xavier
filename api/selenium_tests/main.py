@@ -115,7 +115,7 @@ def test_get_csv_with_dot_net_stacks_expected_only_companies_with_dot_net():
         assert False
     except StopIteration:
         assert True
-    drive.close()
+    # drive.close()
     if (os.path.exists(f'{download_dir}/dot_net.xlsx')):
         os.remove(f'{download_dir}/dot_net.xlsx')
 

@@ -196,7 +196,6 @@ def build_query(state: str, cidade: str, market: str, stack: str, capitais: str)
         if market:
             query += ' and ('
             markets = market.split(',')
-            print(markets)
             for i in range(len(markets)):
                 query += f'mercado.str.contains("(,|^) *{markets[i]}(?! *\w)", na=False, regex=True).values'
                 if i < len(markets) - 1:
@@ -257,7 +256,6 @@ def build_query(state: str, cidade: str, market: str, stack: str, capitais: str)
 
 @app.get('/api/get_env')
 def get_env():
-    print("api key", getenv('APIKEY'))
     return {
             'apiKey': getenv('APIKEY'),
             'authDomain': getenv('AUTHDOMAIN'),
