@@ -1,6 +1,6 @@
 import os
 from time import sleep
-from pandas import read_excel
+from pandas import read_excel, read_csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
